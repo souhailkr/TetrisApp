@@ -9,9 +9,9 @@ public class Owner {
     @Expose
     private long id;
 
-    @SerializedName("name")
+    @SerializedName("login")
     @Expose
-    private String name;
+    private String loginName;
 
     public long getId() {
         return id;
@@ -21,11 +21,19 @@ public class Owner {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLoginName() {
+        return loginName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    @Override
+    public String toString() {
+        return "Owner{" +
+                "id=" + id +
+                ", name='" + loginName + '\'' +
+                '}';
     }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.tetrisapp.Interface.TetrisSearchService;
 import com.example.tetrisapp.Model.Tetris;
+import com.example.tetrisapp.Model.TetrisResponse;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -14,10 +15,10 @@ import retrofit2.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TetrisRepository {
-    private static final String TETRIS_SEARCH_SERVICE_BASE_URL = "https://developer.github.com/";
+    private static final String TETRIS_SEARCH_SERVICE_BASE_URL = "https://api.github.com/";
 
     private TetrisSearchService tetrisSearchService;
-    private MutableLiveData<Tetris> tetrisResponseLiveData;
+    private MutableLiveData<TetrisResponse> tetrisResponseLiveData;
 
     public TetrisRepository() {
         tetrisResponseLiveData = new MutableLiveData<>();
@@ -37,22 +38,22 @@ public class TetrisRepository {
 
     public void searchTetris(String keyword) {
         tetrisSearchService.searchTetris(keyword)
-                .enqueue(new Callback<Tetris>() {
+                .enqueue(new Callback<TetrisResponse>() {
                     @Override
-                    public void onResponse(Call<Tetris> call, Response<Tetris> response) {
+                    public void onResponse(Call<TetrisResponse> call, Response<TetrisResponse> response) {
                         if (response.body() != null) {
                             tetrisResponseLiveData.postValue(response.body());
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Tetris> call, Throwable t) {
+                    public void onFailure(Call<TetrisResponse> call, Throwable t) {
                         tetrisResponseLiveData.postValue(null);
                     }
                 });
     }
 
-    public LiveData<Tetris> getTetrisLiveData() {
+    public LiveData<TetrisResponse> getTetrisLiveData() {
         return tetrisResponseLiveData;
     }
 }

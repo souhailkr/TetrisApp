@@ -1,7 +1,9 @@
-package com.example.tetrisapp;
+package com.example.tetrisapp.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.tetrisapp.R;
 
 public class MainActivity extends AppCompatActivity {
 

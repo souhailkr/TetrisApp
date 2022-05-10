@@ -6,13 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.tetrisapp.Adapter.TetrisSearchResultsAdapter;
 import com.example.tetrisapp.Model.Tetris;
+import com.example.tetrisapp.Model.TetrisResponse;
 import com.example.tetrisapp.Repositories.TetrisRepository;
 
 public class TetrisSearchViewModel extends AndroidViewModel {
 
     private TetrisRepository tetrisRepository;
-    private LiveData<Tetris> tetrisLiveData;
+    private LiveData<TetrisResponse> tetrisLiveData;
 
     public TetrisSearchViewModel(@NonNull Application application) {
         super(application);
@@ -27,7 +29,7 @@ public class TetrisSearchViewModel extends AndroidViewModel {
         tetrisRepository.searchTetris(keyword);
     }
 
-    public LiveData<Tetris> getTetrisLiveData() {
+    public LiveData<TetrisResponse> getTetrisLiveData() {
         return tetrisLiveData;
     }
 }

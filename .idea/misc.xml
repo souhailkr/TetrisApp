@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1767983789260385" />
+        <entry key="app/src/main/res/layout/fragment_tetris_search.xml" value="0.1770516717325228" />
         <entry key="app/src/main/res/layout/tetris_item.xml" value="0.1770516717325228" />
       </map>
     </option>

@@ -103,5 +103,17 @@ public class Tetris {
         this.created_at = created_at;
     }
 
-
+    @Override
+    public String toString() {
+        return "Tetris{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", full_name='" + full_name + '\'' +
+                ", has_wiki=" + has_wiki +
+                ", size=" + size +
+                ", owner=" + owner +
+                ", description='" + description + '\'' +
+                ", created_at=" + created_at +
+                '}';
+    }
 }
