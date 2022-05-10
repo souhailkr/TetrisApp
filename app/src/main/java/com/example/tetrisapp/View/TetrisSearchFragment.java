@@ -19,6 +19,7 @@ import com.example.tetrisapp.Model.Tetris;
 import com.example.tetrisapp.Model.TetrisResponse;
 import com.example.tetrisapp.R;
 import com.example.tetrisapp.ViewModel.TetrisSearchViewModel;
+import com.google.android.material.textfield.TextInputEditText;
 
 
 public class TetrisSearchFragment extends Fragment {
@@ -26,25 +27,29 @@ public class TetrisSearchFragment extends Fragment {
     private TetrisSearchViewModel viewModel;
     private TetrisSearchResultsAdapter adapter;
 
-    private Button searchButton;
+    private Button searchTetrisButton;
+    private Button searchAllButton;
+
+    private TextInputEditText keywordEditText;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-    adapter = new TetrisSearchResultsAdapter(getContext());
+        adapter = new TetrisSearchResultsAdapter(getContext());
 
-    viewModel = ViewModelProviders.of(this).get(TetrisSearchViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(TetrisSearchViewModel.class);
         viewModel.init();
         viewModel.getTetrisLiveData().observe(this, new Observer<TetrisResponse>() {
-        @Override
-        public void onChanged(TetrisResponse terisResponse) {
-            if (terisResponse != null) {
-                adapter.setResults(terisResponse.getItems());
+            @Override
+            public void onChanged(TetrisResponse terisResponse) {
+                if (terisResponse != null) {
+                    adapter.setResults(terisResponse.getItems());
+                }
             }
-        }
-    });
-}
+        });
+    }
 
     @Nullable
     @Override
@@ -55,20 +60,32 @@ public class TetrisSearchFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        searchButton = view.findViewById(R.id.searchBtn);
+        keywordEditText = view.findViewById(R.id.search_editText);
+        searchAllButton = view.findViewById(R.id.search_all_btn);
+        searchTetrisButton = view.findViewById(R.id.search_tetris_btn);
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        searchTetrisButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                performSearch();
+                String keyword = "tetris";
+                performSearch(keyword);
+            }
+        });
+
+        searchAllButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String keyword = keywordEditText.getEditableText().toString();
+
+                performSearch(keyword);
             }
         });
 
         return view;
     }
 
-    public void performSearch() {
-        String keyword = "tetris";
+    public void performSearch(String keyword) {
         viewModel.searchTetris(keyword);
     }
 }
